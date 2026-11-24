@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PFE STATS — Statistique et rédaction pour ton PFE</title>
+<meta name="description" content="PFE STATS t'aide pour ton projet de fin d'études : analyse statistique, questionnaire Google Forms, discussion, mise en page et présentation PowerPoint.">
+<meta property="og:title" content="PFE STATS">
+<meta property="og:description" content="Statistique, questionnaire, discussion, mise en page et PowerPoint pour ton PFE.">
+<meta name="theme-color" content="#ffffff">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans+Arabic:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#111214;
+  --line:#e6e6e8;
+  --steel:#6b6b70;
+  --body:#3a3a3e;
+  --paper:#ffffff;
+  --fog:#f5f5f6;
+  --gold:#c9a24a;
+  --gold-deep:#9a7426;
+  --gold-soft:#e6cf94;
+  --font:"Bricolage Grotesque", system-ui, sans-serif;
+  --pad:clamp(1.25rem, 5vw, 4rem);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html[lang="ar"] body{--font:"IBM Plex Sans Arabic", system-ui, sans-serif;line-height:1.85}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 var(--pad)}
+
+/* nav */
+header{position:fixed;inset:0 0 auto 0;z-index:20;transition:background .3s, border-color .3s;border-bottom:1px solid transparent}
+header.scrolled{background:rgba(255,255,255,.88);backdrop-filter:blur(12px);border-color:var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{font-weight:800;font-size:1.25rem;letter-spacing:-.02em;text-decoration:none;display:flex;align-items:center;gap:.55rem}
+.logo svg{width:28px;height:28px}
+.nav-links{display:flex;gap:2rem;align-items:center;font-size:.95rem}
+.nav-links a{text-decoration:none;color:var(--steel);transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+.lang{background:none;border:1px solid var(--line);color:var(--ink);border-radius:99px;padding:.35rem .9rem;font:inherit;font-size:.9rem;cursor:pointer;transition:border-color .2s}
+.lang:hover{border-color:var(--gold)}
+html[lang="fr"] .lang .to-ar{font-family:"IBM Plex Sans Arabic",sans-serif}
+@media (max-width:760px){.nav-links a{display:none}}
+
+/* hero */
+.hero{min-height:100svh;display:grid;align-items:center;position:relative;padding:110px 0 60px;isolation:isolate}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:3rem;align-items:center}
+.hero h1{font-size:clamp(2.6rem, 7vw, 5.6rem);line-height:.98;font-weight:800;letter-spacing:-.035em}
+html[lang="ar"] .hero h1{line-height:1.25;letter-spacing:0;font-weight:700}
+.hero p.lead{margin-top:1.6rem;color:var(--body);font-size:clamp(1.05rem,1.6vw,1.25rem);max-width:34ch;font-weight:300}
+.cta-row{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2.4rem}
+.btn{display:inline-flex;align-items:center;gap:.6rem;padding:1rem 1.6rem;border-radius:99px;text-decoration:none;font-weight:600;font-size:1rem;transition:transform .2s, background .2s, color .2s}
+.btn svg{width:20px;height:20px;flex:none}
+.btn-gold{background:var(--ink);color:var(--paper)}
+.btn-gold:hover{background:var(--gold);color:var(--ink);transform:translateY(-2px)}
+.btn-line{border:1px solid var(--line);color:var(--ink)}
+.btn-line:hover{border-color:var(--ink)}
+
+/* the curve: the one memorable thing */
+.curve-box{position:relative;aspect-ratio:5/4;width:100%}
+.curve-box svg{width:100%;height:100%;overflow:visible}
+.axis{stroke:var(--line);stroke-width:1}
+.bar{fill:#ececee;transform-origin:bottom;transform-box:fill-box;animation:grow 1s cubic-bezier(.2,.8,.2,1) both}
+.bar.in{fill:#dcdcdf}
+.bell{fill:none;stroke:var(--gold);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:900;stroke-dashoffset:900;animation:draw 2.2s .9s cubic-bezier(.6,0,.2,1) forwards}
+.bell-fill{fill:url(#g);opacity:0;animation:fade 1.2s 2.4s forwards}
+.mu{stroke:var(--gold);stroke-width:1;stroke-dasharray:3 5;opacity:0;animation:fade .8s 2.8s forwards}
+.annot{font-family:"Bricolage Grotesque",sans-serif;font-size:13px;fill:var(--steel);opacity:0;animation:fade .8s 3s forwards}
+.annot.gold{fill:var(--gold-deep)}
+@keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes fade{to{opacity:1}}
+
+.pfe-tag{position:absolute;top:4%;inset-inline-end:2%;font-size:.85rem;color:var(--gold-deep);border:1px solid rgba(201,162,74,.45);border-radius:99px;padding:.3rem .85rem;opacity:0;animation:fade .8s 3.2s forwards}
+
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:2rem}
+  .curve-box{max-width:520px;order:-1;aspect-ratio:16/10}
+  .hero{padding-top:96px}
+}
+
+/* sections */
+section.block{padding:clamp(4.5rem,10vw,8rem) 0;border-top:1px solid var(--line)}
+.block h2{font-size:clamp(2rem,4.5vw,3.4rem);line-height:1.05;letter-spacing:-.03em;font-weight:700;max-width:18ch}
+html[lang="ar"] .block h2{letter-spacing:0;line-height:1.35}
+.block .intro{color:var(--steel);margin-top:1rem;max-width:52ch}
+
+/* services: a ledger, not cards */
+.services{margin-top:3.5rem;display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.svc{background:var(--paper);padding:2rem 1.8rem 2.2rem;display:flex;flex-direction:column;gap:.7rem;transition:background .3s;grid-column:span 2}
+.svc:hover{background:var(--fog)}
+.svc.wide{grid-column:span 3}
+.svc .ico{width:44px;height:44px;color:var(--gold-deep)}
+.svc h3{font-size:1.35rem;font-weight:600;letter-spacing:-.01em;margin-top:.4rem}
+html[lang="ar"] .svc h3{letter-spacing:0}
+.svc p{color:var(--steel);font-size:.98rem}
+.svc.feature{background:var(--ink);color:var(--paper)}
+.svc.feature p{color:#b8b8bd}
+.svc.feature .ico{color:var(--gold)}
+.svc.feature:hover{background:#1c1d20}
+.svc.feature h3{font-size:1.7rem}
+@media (max-width:900px){.svc,.svc.wide{grid-column:span 3}}
+@media (max-width:600px){.services{grid-template-columns:1fr}.svc,.svc.wide{grid-column:auto}}
+
+/* steps: a real sequence */
+.steps{margin-top:3.5rem;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;counter-reset:s;position:relative}
+.steps::before{content:"";position:absolute;top:22px;inset-inline:22px;height:1px;background:linear-gradient(90deg,var(--gold),var(--line))}
+html[dir="rtl"] .steps::before{background:linear-gradient(270deg,var(--gold),var(--line))}
+.step{position:relative;counter-increment:s}
+.step::before{content:counter(s);display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--paper);border:1px solid var(--gold);color:var(--gold-deep);font-weight:700;position:relative;z-index:1}
+.step h3{margin-top:1.3rem;font-size:1.15rem;font-weight:600}
+.step p{color:var(--steel);font-size:.96rem;margin-top:.4rem}
+@media (max-width:900px){
+  .steps{grid-template-columns:1fr;gap:2.2rem}
+  .steps::before{top:22px;bottom:22px;inset-inline-start:22px;inset-inline-end:auto;width:1px;height:auto;background:linear-gradient(180deg,var(--gold),var(--line))}
+  .step{padding-inline-start:68px}
+  .step::before{position:absolute;inset-inline-start:0;top:0}
+  .step h3{margin-top:.5rem}
+}
+
+/* 2027 band */
+.band{padding:clamp(4rem,9vw,7rem) 0;background:var(--ink);color:var(--paper);overflow:hidden}
+.band-inner{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.year{font-size:clamp(5rem,20vw,15rem);font-weight:800;line-height:.8;letter-spacing:-.06em;color:transparent;-webkit-text-stroke:1.5px var(--gold);font-family:"Bricolage Grotesque",sans-serif}
+.band p{max-width:30ch;font-size:clamp(1.15rem,2vw,1.5rem);color:#d6d6da;font-weight:300}
+
+/* contact */
+.contact-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:3rem;align-items:end}
+.contact-links{display:flex;flex-direction:column;gap:1rem}
+.clink{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.4rem 1.6rem;border:1px solid var(--line);border-radius:16px;text-decoration:none;transition:border-color .25s, background .25s}
+.clink:hover{border-color:var(--gold);background:var(--fog)}
+.clink .l{display:flex;align-items:center;gap:1rem}
+.clink svg{width:26px;height:26px;color:var(--gold-deep);flex:none}
+.clink small{display:block;color:var(--steel);font-size:.85rem}
+.clink strong{font-weight:600;font-size:1.15rem;direction:ltr;unicode-bidi:embed}
+.clink .arr{color:var(--steel);transition:transform .25s}
+.clink:hover .arr{transform:translateX(4px);color:var(--gold-deep)}
+html[dir="rtl"] .clink .arr{transform:scaleX(-1)}
+html[dir="rtl"] .clink:hover .arr{transform:scaleX(-1) translateX(4px)}
+@media (max-width:900px){.contact-grid{grid-template-columns:1fr}}
+
+footer{border-top:1px solid var(--line);padding:2rem 0;color:var(--steel);font-size:.9rem}
+footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+
+/* floating whatsapp on mobile */
+.fab{position:fixed;bottom:18px;inset-inline-end:18px;width:56px;height:56px;border-radius:50%;background:var(--ink);color:var(--gold);display:none;place-items:center;z-index:30;box-shadow:0 8px 30px rgba(0,0,0,.18)}
+.fab svg{width:28px;height:28px}
+@media (max-width:760px){.fab{display:grid}}
+
+[data-ar]{transition:opacity .25s}
+body.switching [data-fr]{opacity:0}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition:none!important}
+  .bell{stroke-dashoffset:0}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header id="top">
+  <div class="wrap nav">
+    <a href="#" class="logo" aria-label="PFE STATS">
+      <svg viewBox="0 0 28 28" aria-hidden="true"><rect x="3" y="15" width="5" height="10" rx="1.5" fill="#8e8e93"/><rect x="11.5" y="9" width="5" height="16" rx="1.5" fill="#111214"/><rect x="20" y="3" width="5" height="22" rx="1.5" fill="#c9a24a"/></svg>
+      PFE STATS
+    </a>
+    <nav class="nav-links">
+      <a href="#services" data-fr="Services" data-ar="الخدمات">Services</a>
+      <a href="#etapes" data-fr="Comment ça marche" data-ar="كيفاش نخدمو">Comment ça marche</a>
+      <a href="#contact" data-fr="Contact" data-ar="اتصل بينا">Contact</a>
+      <button class="lang" id="langBtn" type="button" aria-label="Changer de langue"><span class="to-ar">العربية</span></button>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1 data-fr="Ton PFE, avec des statistiques qui tiennent debout." data-ar="الـPFE متاعك، بإحصائيات صحيحة ومضبوطة.">Ton PFE, avec des statistiques qui tiennent debout.</h1>
+      <p class="lead" data-fr="On s'occupe de l'analyse, des tableaux et des graphiques, de la discussion et de la mise en page. Toi, tu soutiens sereinement." data-ar="نتكفلو بالتحليل، الجداول والرسوم البيانية، النقاش والتنسيق. وانت تقدّم مشروعك وانت مرتاح.">On s'occupe de l'analyse, des tableaux et des graphiques, de la discussion et de la mise en page. Toi, tu soutiens sereinement.</p>
+      <div class="cta-row">
+        <a class="btn btn-gold" href="https://wa.me/21627244266" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+          <span data-fr="Écrire sur WhatsApp" data-ar="ابعثلنا على WhatsApp">Écrire sur WhatsApp</span>
+        </a>
+        <a class="btn btn-line" href="#services" data-fr="Voir les services" data-ar="شوف الخدمات">Voir les services</a>
+      </div>
+    </div>
+
+    <div class="curve-box" aria-hidden="true">
+      <span class="pfe-tag">PFE 2027</span>
+      <svg viewBox="0 0 500 400" id="chart">
+        <defs>
+          <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#c9a24a" stop-opacity=".22"/>
+            <stop offset="1" stop-color="#c9a24a" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <line class="axis" x1="20" y1="340" x2="480" y2="340"/>
+        <g id="bars"></g>
+        <path class="bell-fill" id="bellFill"/>
+        <path class="bell" id="bell"/>
+        <line class="mu" x1="250" y1="340" x2="250" y2="48"/>
+        <text class="annot gold" x="258" y="44">μ</text>
+        <text class="annot" x="20" y="368">n = 120</text>
+        <text class="annot" x="200" y="368">σ = 1.2</text>
+        <text class="annot gold" x="390" y="368">p &lt; 0.05</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="services">
+  <div class="wrap">
+    <h2 data-fr="Tout ce qu'il faut pour finir ton mémoire" data-ar="كل ما تحتاجو باش تكمّل مذكرتك">Tout ce qu'il faut pour finir ton mémoire</h2>
+    <p class="intro" data-fr="Tu peux prendre un seul service ou nous confier tout le travail, du questionnaire jusqu'à la présentation." data-ar="تنجم تاخو خدمة وحدة ولا تخلّينا نتكفلو بالخدمة الكل، من الاستبيان حتى العرض.">Tu peux prendre un seul service ou nous confier tout le travail, du questionnaire jusqu'à la présentation.</p>
+
+    <div class="services">
+      <article class="svc wide feature">
+        <svg class="ico" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 38h32"/><rect x="9" y="22" width="6" height="16" rx="1"/><rect x="19" y="14" width="6" height="24" rx="1"/><rect x="29" y="6" width="6" height="32" rx="1"/></svg>
+        <h3 data-fr="Analyse statistique" data-ar="التحليل الإحصائي">Analyse statistique</h3>
+        <p data-fr="Saisie et traitement des données, tableaux, graphiques et tests statistiques, avec une partie résultats rédigée et commentée." data-ar="إدخال ومعالجة المعطيات، جداول، رسوم بيانية واختبارات إحصائية، مع كتابة جزء النتائج والتعليق عليه.">Saisie et traitement des données, tableaux, graphiques et tests statistiques, avec une partie résultats rédigée et commentée.</p>
+      </article>
+      <article class="svc wide">
+        <svg class="ico" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="9" y="5" width="26" height="34" rx="3"/><circle cx="15" cy="15" r="2"/><path d="M20 15h9"/><circle cx="15" cy="23" r="2"/><path d="M20 23h9"/><circle cx="15" cy="31" r="2"/><path d="M20 31h9"/></svg>
+        <h3 data-fr="Questionnaire Google Forms" data-ar="استبيان Google Forms">Questionnaire Google Forms</h3>
+        <p data-fr="Ton questionnaire Word transformé en formulaire en ligne propre, prêt à être partagé avec tes participants." data-ar="الاستبيان متاعك من Word يولّي formulaire en ligne نظيف، جاهز باش تبعثو للمشاركين.">Ton questionnaire Word transformé en formulaire en ligne propre, prêt à être partagé avec tes participants.</p>
+      </article>
+      <article class="svc">
+        <svg class="ico" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M7 10h22a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H17l-6 5v-5H7a3 3 0 0 1-3-3V13a3 3 0 0 1 3-3Z"/><path d="M36 17h1a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-2v4l-5-4h-9"/></svg>
+        <h3 data-fr="Discussion" data-ar="النقاش (Discussion)">Discussion</h3>
+        <p data-fr="Tes résultats comparés à la littérature, avec un raisonnement scientifique clair." data-ar="نقارنو نتائجك مع الدراسات السابقة، بتحليل علمي واضح.">Tes résultats comparés à la littérature, avec un raisonnement scientifique clair.</p>
+      </article>
+      <article class="svc">
+        <svg class="ico" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M11 5h16l8 8v26H11z"/><path d="M27 5v8h8"/><path d="M16 21h14M16 27h14M16 33h9"/></svg>
+        <h3 data-fr="Mise en page" data-ar="التنسيق (Mise en page)">Mise en page</h3>
+        <p data-fr="Sommaire automatique, titres, numérotation, tableaux et figures aux normes de ton école." data-ar="فهرس أوتوماتيكي، عناوين، ترقيم، جداول وأشكال حسب معايير مدرستك.">Sommaire automatique, titres, numérotation, tableaux et figures aux normes de ton école.</p>
+      </article>
+      <article class="svc">
+        <svg class="ico" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="5" y="7" width="34" height="23" rx="2"/><path d="M22 30v6M15 38h14"/><path d="M12 24l6-7 5 4 7-8"/></svg>
+        <h3 data-fr="Présentation PowerPoint" data-ar="عرض PowerPoint">Présentation PowerPoint</h3>
+        <p data-fr="Des diapositives claires et professionnelles pour le jour de ta soutenance." data-ar="شرائح واضحة واحترافية لنهار المناقشة متاعك.">Des diapositives claires et professionnelles pour le jour de ta soutenance.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="etapes">
+  <div class="wrap">
+    <h2 data-fr="Comment ça se passe" data-ar="كيفاش تصير الخدمة">Comment ça se passe</h2>
+    <div class="steps">
+      <div class="step">
+        <h3 data-fr="Tu nous écris" data-ar="تبعثلنا">Tu nous écris</h3>
+        <p data-fr="Sur WhatsApp ou Instagram, tu expliques ton sujet et ce dont tu as besoin." data-ar="على WhatsApp ولا Instagram، تفسّرلنا الموضوع متاعك وشنوّة تحتاج.">Sur WhatsApp ou Instagram, tu expliques ton sujet et ce dont tu as besoin.</p>
+      </div>
+      <div class="step">
+        <h3 data-fr="Tu envoies tes fichiers" data-ar="تبعث الملفات">Tu envoies tes fichiers</h3>
+        <p data-fr="Questionnaire, données ou chapitres déjà rédigés : on regarde tout avant de commencer." data-ar="الاستبيان، المعطيات ولا الأجزاء اللي كتبتها: نشوفو كل شي قبل ما نبداو.">Questionnaire, données ou chapitres déjà rédigés : on regarde tout avant de commencer.</p>
+      </div>
+      <div class="step">
+        <h3 data-fr="On réalise le travail" data-ar="نخدمو الخدمة">On réalise le travail</h3>
+        <p data-fr="Analyse, rédaction ou mise en page, selon le service choisi et ton délai." data-ar="تحليل، كتابة ولا تنسيق، حسب الخدمة اللي اخترتها والوقت اللي عندك.">Analyse, rédaction ou mise en page, selon le service choisi et ton délai.</p>
+      </div>
+      <div class="step">
+        <h3 data-fr="Tu reçois et tu valides" data-ar="تستلم وتأكّد">Tu reçois et tu valides</h3>
+        <p data-fr="On reprend les corrections demandées par ton encadrant si besoin." data-ar="نصلّحو التعديلات اللي يطلبها المؤطر متاعك كان لزم.">On reprend les corrections demandées par ton encadrant si besoin.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap band-inner">
+    <div class="year" aria-hidden="true">2027</div>
+    <p data-fr="Tu soutiens en 2027 ? Commence tôt, on t'accompagne dès le questionnaire." data-ar="تقدّم في 2027؟ ابدا بكري، نرافقوك من الاستبيان.">Tu soutiens en 2027 ? Commence tôt, on t'accompagne dès le questionnaire.</p>
+  </div>
+</section>
+
+<section class="block" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <h2 data-fr="Parle-nous de ton PFE" data-ar="احكيلنا على الـPFE متاعك">Parle-nous de ton PFE</h2>
+      <p class="intro" data-fr="Réponse rapide sur WhatsApp. Tu peux aussi suivre nos astuces PFE sur Instagram." data-ar="نجاوبوك بالخف على WhatsApp. وتنجم تتبع النصائح متاعنا على Instagram.">Réponse rapide sur WhatsApp. Tu peux aussi suivre nos astuces PFE sur Instagram.</p>
+    </div>
+    <div class="contact-links">
+      <a class="clink" href="https://wa.me/21627244266" target="_blank" rel="noopener">
+        <span class="l">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+          <span><small>WhatsApp</small><strong>+216 27 244 266</strong></span>
+        </span>
+        <span class="arr" aria-hidden="true">›</span>
+      </a>
+      <a class="clink" href="https://instagram.com/pfestats" target="_blank" rel="noopener">
+        <span class="l">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          <span><small>Instagram</small><strong>@pfestats</strong></span>
+        </span>
+        <span class="arr" aria-hidden="true">›</span>
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> PFE STATS</span>
+    <span data-fr="Statistique et rédaction pour les projets de fin d'études" data-ar="إحصاء وكتابة لمشاريع ختم الدروس">Statistique et rédaction pour les projets de fin d'études</span>
+  </div>
+</footer>
+
+<a class="fab" href="https://wa.me/21627244266" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+</a>
+
+<script>
+// histogram + bell curve
+(function(){
+  const NS="http://www.w3.org/2000/svg", base=340, mu=250, sd=62, peak=280;
+  const f=x=>base-peak*Math.exp(-((x-mu)**2)/(2*sd*sd));
+  const bars=document.getElementById('bars');
+  const w=26, gap=6, start=30;
+  for(let i=0;i<14;i++){
+    const x=start+i*(w+gap), cx=x+w/2;
+    const h=(base-f(cx))*(0.82+((i*37)%11)/40);
+    const r=document.createElementNS(NS,'rect');
+    r.setAttribute('x',x);r.setAttribute('y',base-h);r.setAttribute('width',w);r.setAttribute('height',h);r.setAttribute('rx',3);
+    r.setAttribute('class','bar'+(Math.abs(cx-mu)<sd?' in':''));
+    r.style.animationDelay=(0.15+i*0.04)+'s';
+    bars.appendChild(r);
+  }
+  let d='';
+  for(let x=20;x<=480;x+=4){d+=(x===20?'M':'L')+x+' '+f(x).toFixed(1)+' ';}
+  document.getElementById('bell').setAttribute('d',d);
+  document.getElementById('bellFill').setAttribute('d',d+'L480 340 L20 340 Z');
+})();
+
+// header on scroll
+const hd=document.getElementById('top');
+addEventListener('scroll',()=>hd.classList.toggle('scrolled',scrollY>20),{passive:true});
+document.getElementById('yr').textContent=new Date().getFullYear();
+
+// language toggle FR / AR
+const btn=document.getElementById('langBtn');
+function setLang(l){
+  const h=document.documentElement;
+  h.lang=l; h.dir=l==='ar'?'rtl':'ltr';
+  document.querySelectorAll('[data-fr]').forEach(el=>{el.textContent=el.dataset[l];});
+  btn.innerHTML=l==='ar'?'<span>Français</span>':'<span class="to-ar">العربية</span>';
+  btn.setAttribute('aria-label',l==='ar'?'Passer en français':'التبديل إلى العربية');
+  document.title=l==='ar'?'PFE STATS — إحصاء وكتابة لمشروع ختم الدروس':'PFE STATS — Statistique et rédaction pour ton PFE';
+  try{localStorage.setItem('lang',l)}catch(e){}
+}
+btn.addEventListener('click',()=>setLang(document.documentElement.lang==='ar'?'fr':'ar'));
+try{const s=localStorage.getItem('lang');if(s==='ar')setLang('ar')}catch(e){}
+</script>
+</body>
+</html>

@@ -443,32 +443,91 @@ html[lang="ar"] .stats-modal h3{letter-spacing:0}
   .mq-track,.stats-btn,.stats-btn::after,.sb-star,.halo,.year{animation:none}
 }
 
-/* ===== phone polish ===== */
+/* ===== phone polish (compact) ===== */
 @media (max-width:760px){
-  .stats-btn,.lang{min-height:42px}
   .svc-picker{grid-template-columns:minmax(0,1fr)}
-  .tab-delay{font-size:.82rem}
-  .fbadge{font-size:.8rem}
+  .stats-btn,.lang{min-height:38px}
 }
 @media (max-width:600px){
-  .hero{min-height:auto;padding:92px 0 44px}
-  .hero-grid{gap:1.6rem}
-  .curve-box{order:0;max-width:340px;margin-top:.4rem}
-  .hero p.lead{max-width:none}
-  .cta-row{flex-direction:column;align-items:stretch;gap:.75rem;margin-top:1.8rem}
-  .cta-row .btn{justify-content:center;width:100%;min-height:52px}
-  button.hero-proof{margin-top:1.2rem}
-  section.block{padding:3.6rem 0}
-  .block .intro{font-size:1rem}
-  .panel-actions{flex-direction:column}
-  .panel-actions .btn{justify-content:center;width:100%;min-height:50px}
-  .clink{padding:1.1rem 1.2rem}
+  body{font-size:.98rem}
+  .nav{height:62px}
+  .logo img{width:34px;height:34px}
+  .hero{min-height:auto;padding:88px 0 30px}
+  .hero-grid{gap:.6rem}
+  .curve-box{order:-1;max-width:250px;margin:0 auto;aspect-ratio:1/1}
+  .avatar{height:104%}
+  .fbadge{font-size:.7rem;padding:.35rem .55rem;border-radius:10px}
+  .b1{top:12%;inset-inline-start:-6%}
+  .b2{inset-inline-end:-8%}
+  .b3{inset-inline-start:-2%;bottom:20%}
+  .pfe-tag{font-size:.7rem;padding:.2rem .6rem}
+  .hero h1{font-size:1.95rem;line-height:1.08;letter-spacing:-.025em}
+  html[lang="ar"] .hero h1{font-size:1.8rem;line-height:1.4}
+  .hero p.lead{font-size:.95rem;margin-top:.8rem;max-width:none}
+  .cta-row{margin-top:1.1rem;gap:.6rem;flex-wrap:nowrap}
+  .cta-row .btn{flex:1 1 auto;justify-content:center;padding:.75rem .75rem;font-size:.88rem;min-height:44px;white-space:nowrap}
+  .cta-row .btn svg{width:18px;height:18px}
+  button.hero-proof{margin-top:.7rem;font-size:.8rem;white-space:nowrap;gap:.4rem}
+  .marquee{padding:.7rem 0}
+  .mq-track span{font-size:.95rem;gap:1.4rem;padding-inline-end:1.4rem}
+  section.block{padding:2.8rem 0}
+  .block h2{font-size:1.6rem}
+  html[lang="ar"] .block h2{font-size:1.5rem}
+  .block .intro{font-size:.93rem;margin-top:.6rem}
+  .svc-picker{margin-top:1.6rem}
+  .svc-tab{padding:.6rem .85rem;gap:.6rem;border-radius:14px}
+  .tab-ico{width:22px;height:22px}
+  .tab-name{font-size:.88rem}
+  .tab-delay{font-size:.74rem}
+  .svc-panel{padding:1.4rem 1.2rem 1.5rem;border-radius:20px;gap:.75rem}
+  .svc-panel .ico{width:40px;height:40px}
+  .svc-panel h3{font-size:1.3rem}
+  .ticks{font-size:.9rem;gap:.5rem}
+  .delay{font-size:.74rem;padding:.25rem .65rem}
+  .panel-actions{gap:.5rem;margin-top:.5rem}
+  .panel-actions .btn{padding:.7rem 1rem;font-size:.88rem;min-height:42px}
+  .proof{padding:2.6rem 0}
+  .big{font-size:3.2rem}
+  .stars{font-size:1.2rem}
+  .proof-item p{font-size:.92rem;margin-top:.5rem}
+  .why{margin-top:1.6rem;gap:1.4rem}
+  .why-item svg{width:28px;height:28px}
+  .why-item h3{font-size:1.05rem;margin-top:.6rem}
+  .why-item p{font-size:.9rem}
+  .steps{margin-top:1.8rem;gap:1.5rem}
+  .step{padding-inline-start:56px}
+  .step::before{width:38px;height:38px}
+  .steps::before{inset-inline-start:19px;top:19px;bottom:19px}
+  .step h3{font-size:1.02rem;margin-top:.3rem}
+  .step p{font-size:.9rem}
+  .band{padding:2.6rem 0}
+  .year{font-size:4.6rem}
+  .band p{font-size:1.02rem}
+  .contact-grid{gap:1.4rem}
+  .clink{padding:.9rem 1rem;border-radius:14px}
+  .clink strong{font-size:1rem}
+  .clink svg{width:22px;height:22px}
+  footer{padding:1.4rem 0;font-size:.8rem}
+  .dv-head{padding:1rem 1.1rem}
+  .dv-head h3{font-size:1.05rem}
+  .dv-head p{font-size:.8rem}
+  .dv-form{padding:1.1rem 1.1rem 1.3rem;gap:.85rem}
+  .dv-field > label,.dv-field > .dv-label{font-size:.88rem}
+  .dv-form input[type=text],.dv-form input[type=tel],.dv-form input[type=number],.dv-form textarea{padding:.65rem .8rem;border-radius:12px}
+  .dv-choices label{min-height:42px;font-size:.85rem}
+  .dv-note,.dv-info{font-size:.84rem;padding:.75rem .85rem}
+  .dv-submit{padding:.85rem;font-size:.95rem}
 }
 @media (max-width:360px){
   :root{--pad:1rem}
   .nav-links{gap:.4rem}
-  .lang{padding:.35rem .7rem}
-  .stats-btn{padding:.42rem .7rem}
+  .lang{padding:.3rem .65rem}
+  .stats-btn{padding:.38rem .65rem}
+  .hero h1{font-size:1.75rem}
+  .cta-row .btn{font-size:.8rem;padding:.7rem .5rem}
+  .cta-row .btn svg{display:none}
+  button.hero-proof{font-size:.74rem}
+  .curve-box{max-width:220px}
 }
 </style>
 <script>

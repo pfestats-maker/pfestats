@@ -360,6 +360,7 @@ html[dir="rtl"] .mq-track{animation-name:mqr}
 .dv-file b{display:block;font-size:.95rem}
 .dv-file span{font-size:.82rem;color:var(--steel);word-break:break-all}
 .dv-file.has b{color:var(--gold-deep)}
+.dv-note{display:flex;gap:.6rem;align-items:flex-start;padding:.85rem 1rem;border-radius:14px;background:#fdfaf2;border:1px solid #efe2bf;color:var(--body);font-size:.9rem;line-height:1.45}
 .dv-err{color:#b3261e;font-size:.85rem;min-height:1em}
 .dv-submit{width:100%;justify-content:center;border:0;font:inherit;font-weight:700;font-size:1.02rem;cursor:pointer;background:#1f9e57;color:#fff;padding:1.05rem}
 .dv-submit:hover{background:#178a4b}
@@ -771,6 +772,7 @@ html[lang="ar"] .stats-modal h3{letter-spacing:0}
       <label for="dvNote" data-fr="Remarques (facultatif)" data-ar="ملاحظات (اختياري)">Remarques (facultatif)</label>
       <textarea id="dvNote" name="remarques" data-fr-ph="Ex. : date limite, logiciel demandé par l'encadrant…" data-ar-ph="مثال: آخر أجل، البرنامج اللي طلبو المؤطر…" placeholder="Ex. : date limite, logiciel demandé par l'encadrant…"></textarea>
     </div>
+    <p class="dv-note"><span aria-hidden="true">📎</span><span data-fr="N'oublie pas : après l'envoi du message, envoie ton questionnaire Word ou PDF dans la conversation WhatsApp pour recevoir un devis complet." data-ar="ما تنساش: من بعد ما تبعث الميساج، ابعث الاستبيان متاعك (Word ولا PDF) في محادثة WhatsApp باش تاخو سوم كامل.">N'oublie pas : après l'envoi du message, envoie ton questionnaire Word ou PDF dans la conversation WhatsApp pour recevoir un devis complet.</span></p>
     <p class="dv-err" id="dvErr" role="alert"></p>
     <button class="btn dv-submit" type="submit"><span data-fr="Envoyer sur WhatsApp" data-ar="ابعث على WhatsApp">Envoyer sur WhatsApp</span></button>
     <p class="dv-alt"><span data-fr="Tu préfères discuter directement ?" data-ar="تحب تحكي معانا مباشرة؟">Tu préfères discuter directement ?</span> <a href="https://wa.me/21627244266" target="_blank" rel="noopener" data-fr="Écris-nous sur WhatsApp" data-ar="ابعثلنا على WhatsApp">Écris-nous sur WhatsApp</a></p>

@@ -345,7 +345,7 @@ html[dir="rtl"] .mq-track{animation-name:mqr}
 .dv-field{display:grid;gap:.4rem}
 .dv-field > label,.dv-field > .dv-label{font-weight:600;font-size:.95rem}
 .dv-field small{color:var(--steel);font-size:.82rem}
-.dv-form input[type=text],.dv-form input[type=number],.dv-form textarea{width:100%;font:inherit;font-size:1rem;color:var(--ink);background:var(--fog);border:1px solid var(--line);border-radius:14px;padding:.8rem .95rem;transition:border-color .2s, background .2s, box-shadow .2s}
+.dv-form input[type=text],.dv-form input[type=tel],.dv-form input[type=number],.dv-form textarea{width:100%;font:inherit;font-size:1rem;color:var(--ink);background:var(--fog);border:1px solid var(--line);border-radius:14px;padding:.8rem .95rem;transition:border-color .2s, background .2s, box-shadow .2s}
 .dv-form textarea{min-height:84px;resize:vertical}
 .dv-form input:focus,.dv-form textarea:focus{outline:none;border-color:var(--gold);background:#fff;box-shadow:0 0 0 4px rgba(201,162,74,.18)}
 .dv-choices{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
@@ -360,7 +360,16 @@ html[dir="rtl"] .mq-track{animation-name:mqr}
 .dv-file b{display:block;font-size:.95rem}
 .dv-file span{font-size:.82rem;color:var(--steel);word-break:break-all}
 .dv-file.has b{color:var(--gold-deep)}
-.dv-note{display:flex;gap:.6rem;align-items:flex-start;padding:.85rem 1rem;border-radius:14px;background:#fdfaf2;border:1px solid #efe2bf;color:var(--body);font-size:.9rem;line-height:1.45}
+.dv-note{position:relative;display:flex;gap:.75rem;align-items:flex-start;padding:.9rem 1rem;border-radius:14px;background:#fdfaf2;border:1.5px solid #efe2bf;color:var(--body);font-size:.9rem;line-height:1.45;cursor:pointer;transition:border-color .2s, background .2s}
+.dv-note input{position:absolute;opacity:0;width:1px;height:1px}
+.dv-ck{flex:none;width:24px;height:24px;margin-top:1px;border-radius:7px;border:2px solid var(--gold);background:#fff;display:grid;place-items:center;transition:background .2s, transform .2s}
+.dv-ck::after{content:"";width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) scale(0);margin-top:-3px;transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
+.dv-note:has(input:checked){border-color:var(--gold);background:#faf3df}
+.dv-note:has(input:checked) .dv-ck{background:var(--gold)}
+.dv-note:has(input:checked) .dv-ck::after{transform:rotate(45deg) scale(1)}
+.dv-note:has(input:focus-visible){outline:2px solid var(--gold);outline-offset:2px}
+.dv-note.need{border-color:#b3261e;animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
 .dv-err{color:#b3261e;font-size:.85rem;min-height:1em}
 .dv-submit{width:100%;justify-content:center;border:0;font:inherit;font-weight:700;font-size:1.02rem;cursor:pointer;background:#1f9e57;color:#fff;padding:1.05rem}
 .dv-submit:hover{background:#178a4b}
@@ -753,6 +762,10 @@ html[lang="ar"] .stats-modal h3{letter-spacing:0}
       <input type="text" id="dvName" name="prenom" autocomplete="given-name" data-fr-ph="Ex. : Amira" data-ar-ph="مثال: أميرة" placeholder="Ex. : Amira">
     </div>
     <div class="dv-field">
+      <label for="dvTel" data-fr="Ton numéro de téléphone" data-ar="رقم تليفونك">Ton numéro de téléphone</label>
+      <input type="tel" id="dvTel" name="tel" autocomplete="tel" inputmode="tel" required dir="ltr" data-fr-ph="Ex. : 22 123 456" data-ar-ph="مثال: 22 123 456" placeholder="Ex. : 22 123 456">
+    </div>
+    <div class="dv-field">
       <label for="dvCopies" data-fr="Nombre de copies du questionnaire" data-ar="عدد نسخ الاستبيان">Nombre de copies du questionnaire</label>
       <input type="number" id="dvCopies" name="copies" min="1" max="100000" inputmode="numeric" required data-fr-ph="Ex. : 120" data-ar-ph="مثال: 120" placeholder="Ex. : 120">
     </div>
@@ -772,7 +785,11 @@ html[lang="ar"] .stats-modal h3{letter-spacing:0}
       <label for="dvNote" data-fr="Remarques (facultatif)" data-ar="ملاحظات (اختياري)">Remarques (facultatif)</label>
       <textarea id="dvNote" name="remarques" data-fr-ph="Ex. : date limite, logiciel demandé par l'encadrant…" data-ar-ph="مثال: آخر أجل، البرنامج اللي طلبو المؤطر…" placeholder="Ex. : date limite, logiciel demandé par l'encadrant…"></textarea>
     </div>
-    <p class="dv-note"><span aria-hidden="true">📎</span><span data-fr="N'oublie pas : après l'envoi du message, envoie ton questionnaire Word ou PDF dans la conversation WhatsApp pour recevoir un devis complet." data-ar="ما تنساش: من بعد ما تبعث الميساج، ابعث الاستبيان متاعك (Word ولا PDF) في محادثة WhatsApp باش تاخو سوم كامل.">N'oublie pas : après l'envoi du message, envoie ton questionnaire Word ou PDF dans la conversation WhatsApp pour recevoir un devis complet.</span></p>
+    <label class="dv-note" id="dvAckBox">
+      <input type="checkbox" id="dvAck" name="ack" required>
+      <span class="dv-ck" aria-hidden="true"></span>
+      <span data-fr="📎 J'ai compris : après l'envoi du message, j'envoie mon questionnaire Word ou PDF dans la conversation WhatsApp pour recevoir un devis complet." data-ar="📎 فهمت: من بعد ما نبعث الميساج، نبعث الاستبيان متاعي (Word ولا PDF) في محادثة WhatsApp باش ناخو سوم كامل.">📎 J'ai compris : après l'envoi du message, j'envoie mon questionnaire Word ou PDF dans la conversation WhatsApp pour recevoir un devis complet.</span>
+    </label>
     <p class="dv-err" id="dvErr" role="alert"></p>
     <button class="btn dv-submit" type="submit"><span data-fr="Envoyer sur WhatsApp" data-ar="ابعث على WhatsApp">Envoyer sur WhatsApp</span></button>
     <p class="dv-alt"><span data-fr="Tu préfères discuter directement ?" data-ar="تحب تحكي معانا مباشرة؟">Tu préfères discuter directement ?</span> <a href="https://wa.me/21627244266" target="_blank" rel="noopener" data-fr="Écris-nous sur WhatsApp" data-ar="ابعثلنا على WhatsApp">Écris-nous sur WhatsApp</a></p>
@@ -952,6 +969,7 @@ document.querySelectorAll('.svc-panel').forEach(c=>c.addEventListener('pointermo
 (function(){
   const dlg=document.getElementById('devisModal'), form=document.getElementById('devisForm');
   const err=document.getElementById('dvErr'), NL=String.fromCharCode(10);
+  document.getElementById('dvAck').addEventListener('change',()=>{document.getElementById('dvAckBox').classList.remove('need');err.textContent='';});
   const ar=()=>document.documentElement.lang==='ar';
   document.querySelectorAll('[data-open-devis]').forEach(b=>b.addEventListener('click',()=>{dlg.classList.remove('sent');err.textContent='';dlg.showModal?dlg.showModal():dlg.setAttribute('open','');}));
   const close=()=>{dlg.close?dlg.close():dlg.removeAttribute('open');};
@@ -961,14 +979,18 @@ document.querySelectorAll('.svc-panel').forEach(c=>c.addEventListener('pointermo
     e.preventDefault();
     const d=new FormData(form);
     const copies=(d.get('copies')||'').trim(), coll=d.get('collecte'), etude=(d.get('etude')||'').trim();
+    const tel=(d.get('tel')||'').trim(), ack=document.getElementById('dvAck').checked;
     let msg='';
-    if(!copies||+copies<1)msg=ar()?'اكتب عدد نسخ الاستبيان.':'Indique le nombre de copies du questionnaire.';
+    if(tel.replace(/[^0-9]/g,'').length<8)msg=ar()?'اكتب رقم تليفونك (8 أرقام على الأقل).':'Indique ton numéro de téléphone (au moins 8 chiffres).';
+    else if(!copies||+copies<1)msg=ar()?'اكتب عدد نسخ الاستبيان.':'Indique le nombre de copies du questionnaire.';
     else if(!coll)msg=ar()?'اختار طريقة جمع الإجابات.':'Choisis le type de collecte.';
     else if(!etude)msg=ar()?'اكتب نوع الدراسة.':"Écris le type d'étude.";
+    else if(!ack){msg=ar()?'أكّد إنك باش تبعث الاستبيان متاعك.':"Coche la case pour confirmer que tu enverras ton questionnaire.";const nb=document.getElementById('dvAckBox');nb.classList.remove('need');void nb.offsetWidth;nb.classList.add('need');}
     if(msg){err.textContent=msg;return;}
     const name=(d.get('prenom')||'').trim(), note=(d.get('remarques')||'').trim();
     const lines=['Bonjour PFE STATS 👋','Je voudrais connaître le prix pour une analyse statistique :',''];
     if(name)lines.push('• Prénom : '+name);
+    lines.push('• Téléphone : '+tel);
     lines.push('• Nombre de copies : '+copies,'• Type de collecte : '+coll,"• Type d'étude : "+etude,'• Questionnaire : je vous l’envoie juste après (Word ou PDF)');
     if(note)lines.push('• Remarques : '+note);
     const url='https://wa.me/21627244266?text='+encodeURIComponent(lines.join(NL));

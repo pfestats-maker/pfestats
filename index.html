@@ -768,14 +768,6 @@ html[lang="ar"] .stats-modal h3{letter-spacing:0}
       <input type="text" id="dvType" name="etude" required data-fr-ph="Ex. : étude descriptive et analytique (comparaison entre deux services)" data-ar-ph="مثال: دراسة وصفية وتحليلية (مقارنة بين مصلحتين)" placeholder="Ex. : étude descriptive et analytique (comparaison entre deux services)">
     </div>
     <div class="dv-field">
-      <span class="dv-label" data-fr="Ton questionnaire (Word ou PDF)" data-ar="الاستبيان متاعك (Word ولا PDF)">Ton questionnaire (Word ou PDF)</span>
-      <label class="dv-file" id="dvFileBox">
-        <input type="file" id="dvFile" name="questionnaire" accept=".doc,.docx,.pdf,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 17v-6M9 14l3-3 3 3"/></svg>
-        <div><b id="dvFileTitle" data-fr="Choisir le fichier" data-ar="اختار الملف">Choisir le fichier</b><span id="dvFileName" data-fr="Tu le joindras dans WhatsApp à l'étape suivante." data-ar="باش تبعثو في WhatsApp في الخطوة الجاية.">Tu le joindras dans WhatsApp à l'étape suivante.</span></div>
-      </label>
-    </div>
-    <div class="dv-field">
       <label for="dvNote" data-fr="Remarques (facultatif)" data-ar="ملاحظات (اختياري)">Remarques (facultatif)</label>
       <textarea id="dvNote" name="remarques" data-fr-ph="Ex. : date limite, logiciel demandé par l'encadrant…" data-ar-ph="مثال: آخر أجل، البرنامج اللي طلبو المؤطر…" placeholder="Ex. : date limite, logiciel demandé par l'encadrant…"></textarea>
     </div>
@@ -783,13 +775,6 @@ html[lang="ar"] .stats-modal h3{letter-spacing:0}
     <button class="btn dv-submit" type="submit"><span data-fr="Envoyer sur WhatsApp" data-ar="ابعث على WhatsApp">Envoyer sur WhatsApp</span></button>
     <p class="dv-alt"><span data-fr="Tu préfères discuter directement ?" data-ar="تحب تحكي معانا مباشرة؟">Tu préfères discuter directement ?</span> <a href="https://wa.me/21627244266" target="_blank" rel="noopener" data-fr="Écris-nous sur WhatsApp" data-ar="ابعثلنا على WhatsApp">Écris-nous sur WhatsApp</a></p>
   </form>
-  <div class="dv-done" aria-live="polite">
-    <div class="dv-check" aria-hidden="true">✓</div>
-    <h4 data-fr="Dernière étape sur WhatsApp" data-ar="آخر خطوة على WhatsApp">Dernière étape sur WhatsApp</h4>
-    <p data-fr="Envoie le message déjà écrit, puis joins ton questionnaire avec le trombone 📎 :" data-ar="ابعث الميساج المكتوب، ومن بعد زيد الاستبيان بالـ 📎 :">Envoie le message déjà écrit, puis joins ton questionnaire avec le trombone 📎 :</p>
-    <span class="dv-fname" id="dvDoneFile"></span>
-    <a class="btn dv-submit" id="dvReopen" href="https://wa.me/21627244266" target="_blank" rel="noopener"><span data-fr="Rouvrir WhatsApp" data-ar="حل WhatsApp من جديد">Rouvrir WhatsApp</span></a>
-  </div>
 </dialog>
 
 <dialog class="stats-modal" id="statsModal" aria-labelledby="smTitle">
@@ -964,39 +949,29 @@ document.querySelectorAll('.svc-panel').forEach(c=>c.addEventListener('pointermo
 // devis form (analyse statistique) -> WhatsApp
 (function(){
   const dlg=document.getElementById('devisModal'), form=document.getElementById('devisForm');
-  const file=document.getElementById('dvFile'), box=document.getElementById('dvFileBox');
   const err=document.getElementById('dvErr'), NL=String.fromCharCode(10);
   const ar=()=>document.documentElement.lang==='ar';
-  window.__dvFileLabel=function(){
-    const f=file.files[0], t=document.getElementById('dvFileTitle'), n=document.getElementById('dvFileName');
-    if(f){box.classList.add('has');t.textContent=ar()?'الملف المختار':'Fichier choisi';n.textContent=f.name;}
-  };
-  file.addEventListener('change',()=>{err.textContent='';window.__dvFileLabel();});
   document.querySelectorAll('[data-open-devis]').forEach(b=>b.addEventListener('click',()=>{dlg.classList.remove('sent');err.textContent='';dlg.showModal?dlg.showModal():dlg.setAttribute('open','');}));
   const close=()=>{dlg.close?dlg.close():dlg.removeAttribute('open');};
   dlg.querySelector('[data-close-devis]').addEventListener('click',close);
   dlg.addEventListener('click',e=>{if(e.target===dlg)close();});
   form.addEventListener('submit',e=>{
     e.preventDefault();
-    const d=new FormData(form), f=file.files[0];
+    const d=new FormData(form);
     const copies=(d.get('copies')||'').trim(), coll=d.get('collecte'), etude=(d.get('etude')||'').trim();
     let msg='';
     if(!copies||+copies<1)msg=ar()?'اكتب عدد نسخ الاستبيان.':'Indique le nombre de copies du questionnaire.';
     else if(!coll)msg=ar()?'اختار طريقة جمع الإجابات.':'Choisis le type de collecte.';
     else if(!etude)msg=ar()?'اكتب نوع الدراسة.':"Écris le type d'étude.";
-    else if(!f)msg=ar()?'اختار ملف الاستبيان (Word ولا PDF).':'Choisis ton questionnaire (Word ou PDF).';
-    else if(!/[.](docx?|pdf)$/i.test(f.name))msg=ar()?'الملف لازم يكون Word ولا PDF.':'Le fichier doit être un Word ou un PDF.';
     if(msg){err.textContent=msg;return;}
     const name=(d.get('prenom')||'').trim(), note=(d.get('remarques')||'').trim();
     const lines=['Bonjour PFE STATS 👋','Je voudrais connaître le prix pour une analyse statistique :',''];
     if(name)lines.push('• Prénom : '+name);
-    lines.push('• Nombre de copies : '+copies,'• Type de collecte : '+coll,"• Type d'étude : "+etude,'• Questionnaire : '+f.name+' (je le joins ici)');
+    lines.push('• Nombre de copies : '+copies,'• Type de collecte : '+coll,"• Type d'étude : "+etude,'• Questionnaire : je vous l’envoie juste après (Word ou PDF)');
     if(note)lines.push('• Remarques : '+note);
     const url='https://wa.me/21627244266?text='+encodeURIComponent(lines.join(NL));
-    document.getElementById('dvReopen').href=url;
-    document.getElementById('dvDoneFile').textContent='📎 '+f.name;
-    dlg.classList.add('sent');
     window.open(url,'_blank','noopener');
+    close();
   });
 })();
 
@@ -1018,7 +993,6 @@ function setLang(l){
   h.lang=l; h.dir=l==='ar'?'rtl':'ltr';
   document.querySelectorAll('[data-fr]').forEach(el=>{el.textContent=el.dataset[l];});
   document.querySelectorAll('[data-fr-ph]').forEach(el=>{el.placeholder=el.dataset[l+'Ph'];});
-  if(window.__dvFileLabel)window.__dvFileLabel();
   splitHeadline();
   btn.innerHTML=l==='ar'?'<span>Français</span>':'<span class="to-ar">العربية</span>';
   btn.setAttribute('aria-label',l==='ar'?'Passer en français':'التبديل إلى العربية');

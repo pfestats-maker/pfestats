@@ -360,7 +360,8 @@ html[dir="rtl"] .mq-track{animation-name:mqr}
 .dv-file b{display:block;font-size:.95rem}
 .dv-file span{font-size:.82rem;color:var(--steel);word-break:break-all}
 .dv-file.has b{color:var(--gold-deep)}
-.devis-modal:not([data-service="stats"]) .only-stats,.devis-modal:not([data-service="forms"]) .only-forms,.devis-modal:not([data-service="disc"]) .only-disc,.devis-modal[data-service="stats"] .not-stats,.devis-modal[data-service="disc"] .not-disc,.devis-modal:not([data-service="page"]) .only-page,.devis-modal[data-service="page"] .not-page{display:none}
+.devis-modal:not([data-service="stats"]) .only-stats,.devis-modal:not([data-service="forms"]) .only-forms,.devis-modal:not([data-service="disc"]) .only-disc,.devis-modal[data-service="stats"] .not-stats,.devis-modal[data-service="disc"] .not-disc,.devis-modal:not([data-service="page"]) .only-page,.devis-modal[data-service="page"] .not-page,.devis-modal:not([data-service="ppt"]) .only-ppt,.devis-modal[data-service="ppt"] .not-ppt,.devis-modal:not([data-service="page"]):not([data-service="ppt"]) .only-pageppt,.devis-modal[data-service="page"] .not-pageppt,.devis-modal[data-service="ppt"] .not-pageppt{display:none}
+.dv-info{display:flex;gap:.6rem;align-items:flex-start;padding:.85rem 1rem;border-radius:14px;background:var(--fog);border:1px solid var(--line);color:var(--body);font-size:.9rem;line-height:1.45}
 .dv-note{position:relative;display:flex;gap:.75rem;align-items:flex-start;padding:.9rem 1rem;border-radius:14px;background:#fdfaf2;border:1.5px solid #efe2bf;color:var(--body);font-size:.9rem;line-height:1.45;cursor:pointer;transition:border-color .2s, background .2s}
 .dv-note input{position:absolute;opacity:0;width:1px;height:1px}
 .dv-ck{flex:none;width:24px;height:24px;margin-top:1px;border-radius:7px;border:2px solid var(--gold);background:#fff;display:grid;place-items:center;transition:background .2s, transform .2s}
@@ -642,7 +643,10 @@ html[lang="ar"] .stats-modal h3{letter-spacing:0}
           <li data-fr="Animations adaptées" data-ar="حركات (animations) مناسبة">Animations adaptées</li>
           <li data-fr="Tes résultats mis en valeur pour la soutenance" data-ar="نتائجك مبرزة نهار المناقشة">Tes résultats mis en valeur pour la soutenance</li>
         </ul>
-          <a class="btn btn-gold panel-cta" href="https://wa.me/21627244266?text=Bonjour%20PFE%20STATS%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20%3A%20PowerPoint%20professionnel" target="_blank" rel="noopener"><span data-fr="Demander ce service" data-ar="اطلب هالخدمة">Demander ce service</span></a>
+          <div class="panel-actions">
+            <button class="btn btn-gold panel-cta" type="button" data-open-devis="ppt"><span data-fr="Demander un devis" data-ar="اطلب سوم الخدمة">Demander un devis</span></button>
+            <a class="btn panel-wa" href="https://wa.me/21627244266?text=Bonjour%20PFE%20STATS%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20%3A%20PowerPoint%20professionnel" target="_blank" rel="noopener"><span data-fr="Écrire sur WhatsApp" data-ar="ابعثلنا على WhatsApp">Écrire sur WhatsApp</span></a>
+          </div>
         </div>
       </div>
     </div>
@@ -761,7 +765,7 @@ html[lang="ar"] .stats-modal h3{letter-spacing:0}
   <div class="dv-head">
     <img src="logo.webp" alt="" width="40" height="40">
     <div>
-      <h3 id="dvTitle"><span class="only-stats" data-fr="Devis analyse statistique" data-ar="سوم التحليل الإحصائي">Devis analyse statistique</span><span class="only-forms" data-fr="Devis questionnaire Google Forms" data-ar="سوم استبيان Google Forms">Devis questionnaire Google Forms</span><span class="only-disc" data-fr="Devis discussion scientifique" data-ar="سوم النقاش العلمي">Devis discussion scientifique</span><span class="only-page" data-fr="Devis mise en page" data-ar="سوم التنسيق">Devis mise en page</span></h3>
+      <h3 id="dvTitle"><span class="only-stats" data-fr="Devis analyse statistique" data-ar="سوم التحليل الإحصائي">Devis analyse statistique</span><span class="only-forms" data-fr="Devis questionnaire Google Forms" data-ar="سوم استبيان Google Forms">Devis questionnaire Google Forms</span><span class="only-disc" data-fr="Devis discussion scientifique" data-ar="سوم النقاش العلمي">Devis discussion scientifique</span><span class="only-page" data-fr="Devis mise en page" data-ar="سوم التنسيق">Devis mise en page</span><span class="only-ppt" data-fr="Devis présentation PowerPoint" data-ar="سوم عرض PowerPoint">Devis présentation PowerPoint</span></h3>
       <p data-fr="Réponds en 1 minute, on te donne le prix sur WhatsApp." data-ar="جاوب في دقيقة، ونعطيوك السوم على WhatsApp.">Réponds en 1 minute, on te donne le prix sur WhatsApp.</p>
     </div>
     <button class="dv-close" type="button" data-close-devis aria-label="Fermer / إغلاق">×</button>
@@ -787,11 +791,11 @@ html[lang="ar"] .stats-modal h3{letter-spacing:0}
         <label><input type="radio" name="collecte" value="En ligne + papier"><span data-fr="Les deux" data-ar="الزوز">Les deux</span></label>
       </div>
     </div>
-    <div class="dv-field not-page">
+    <div class="dv-field not-pageppt">
       <label for="dvType" data-fr="Type d'étude" data-ar="نوع الدراسة">Type d'étude</label>
       <input type="text" id="dvType" name="etude" required data-fr-ph="Ex. : étude descriptive et analytique (comparaison entre deux services)" data-ar-ph="مثال: دراسة وصفية وتحليلية (مقارنة بين مصلحتين)" placeholder="Ex. : étude descriptive et analytique (comparaison entre deux services)">
     </div>
-    <div class="dv-field only-page">
+    <div class="dv-field only-pageppt">
       <label for="dvFac" data-fr="Ta faculté / ton école" data-ar="الكلية / المدرسة متاعك">Ta faculté / ton école</label>
       <input type="text" id="dvFac" name="faculte" data-fr-ph="Ex. : ISSTM, ESSTS, Faculté de médecine…" data-ar-ph="مثال: ISSTM، ESSTS، كلية الطب…" placeholder="Ex. : ISSTM, ESSTS, Faculté de médecine…">
     </div>
@@ -807,12 +811,14 @@ html[lang="ar"] .stats-modal h3{letter-spacing:0}
       <label for="dvNote" data-fr="Remarques (facultatif)" data-ar="ملاحظات (اختياري)">Remarques (facultatif)</label>
       <textarea id="dvNote" name="remarques" data-fr-ph="Ex. : date limite, logiciel demandé par l'encadrant…" data-ar-ph="مثال: آخر أجل، البرنامج اللي طلبو المؤطر…" placeholder="Ex. : date limite, logiciel demandé par l'encadrant…"></textarea>
     </div>
+    <p class="dv-info only-ppt"><span aria-hidden="true">💡</span><span data-fr="Le contenu de ta présentation doit être un résumé de ton rapport : les idées clés de chaque partie (introduction, méthodes, résultats, discussion, conclusion), pas le rapport complet." data-ar="محتوى العرض لازم يكون ملخص للتقرير متاعك: الأفكار الأساسية متاع كل جزء (المقدمة، المنهجية، النتائج، النقاش، الخاتمة)، موش التقرير الكل.">Le contenu de ta présentation doit être un résumé de ton rapport : les idées clés de chaque partie (introduction, méthodes, résultats, discussion, conclusion), pas le rapport complet.</span></p>
     <label class="dv-note" id="dvAckBox">
       <input type="checkbox" id="dvAck" name="ack" required>
       <span class="dv-ck" aria-hidden="true"></span>
       <span class="only-disc" data-fr="📎 J'ai compris : après l'envoi du message, j'envoie dans la conversation WhatsApp ma partie résultats, mon questionnaire, la partie matériel et méthodes et l'introduction (Word ou PDF) pour recevoir un devis complet." data-ar="📎 فهمت: من بعد ما نبعث الميساج، نبعث في محادثة WhatsApp جزء النتائج، الاستبيان، جزء المواد والطرق والمقدمة (Word ولا PDF) باش ناخو سوم كامل.">📎 J'ai compris : après l'envoi du message, j'envoie dans la conversation WhatsApp ma partie résultats, mon questionnaire, la partie matériel et méthodes et l'introduction (Word ou PDF) pour recevoir un devis complet.</span>
       <span class="only-page" data-fr="📎 J'ai compris : après l'envoi du message, j'envoie mon rapport Word dans la conversation WhatsApp pour recevoir un devis complet." data-ar="📎 فهمت: من بعد ما نبعث الميساج، نبعث التقرير متاعي (Word) في محادثة WhatsApp باش ناخو سوم كامل.">📎 J'ai compris : après l'envoi du message, j'envoie mon rapport Word dans la conversation WhatsApp pour recevoir un devis complet.</span>
-      <span class="not-disc not-page" data-fr="📎 J'ai compris : après l'envoi du message, j'envoie mon questionnaire Word ou PDF dans la conversation WhatsApp pour recevoir un devis complet." data-ar="📎 فهمت: من بعد ما نبعث الميساج، نبعث الاستبيان متاعي (Word ولا PDF) في محادثة WhatsApp باش ناخو سوم كامل.">📎 J'ai compris : après l'envoi du message, j'envoie mon questionnaire Word ou PDF dans la conversation WhatsApp pour recevoir un devis complet.</span>
+      <span class="only-ppt" data-fr="📎 J'ai compris : après l'envoi du message, j'envoie le contenu de ma présentation en Word (résumé de mon rapport) dans la conversation WhatsApp pour recevoir un devis complet." data-ar="📎 فهمت: من بعد ما نبعث الميساج، نبعث محتوى العرض متاعي في Word (ملخص التقرير) في محادثة WhatsApp باش ناخو سوم كامل.">📎 J'ai compris : après l'envoi du message, j'envoie le contenu de ma présentation en Word (résumé de mon rapport) dans la conversation WhatsApp pour recevoir un devis complet.</span>
+      <span class="not-disc not-page not-ppt" data-fr="📎 J'ai compris : après l'envoi du message, j'envoie mon questionnaire Word ou PDF dans la conversation WhatsApp pour recevoir un devis complet." data-ar="📎 فهمت: من بعد ما نبعث الميساج، نبعث الاستبيان متاعي (Word ولا PDF) في محادثة WhatsApp باش ناخو سوم كامل.">📎 J'ai compris : après l'envoi du message, j'envoie mon questionnaire Word ou PDF dans la conversation WhatsApp pour recevoir un devis complet.</span>
     </label>
     <p class="dv-err" id="dvErr" role="alert"></p>
     <button class="btn dv-submit" type="submit"><span data-fr="Envoyer sur WhatsApp" data-ar="ابعث على WhatsApp">Envoyer sur WhatsApp</span></button>
@@ -1004,26 +1010,26 @@ document.querySelectorAll('.svc-panel').forEach(c=>c.addEventListener('pointermo
     const d=new FormData(form);
     const copies=(d.get('copies')||'').trim(), coll=d.get('collecte'), etude=(d.get('etude')||'').trim();
     const tel=(d.get('tel')||'').trim(), ack=document.getElementById('dvAck').checked;
-    const svc=dlg.dataset.service||'stats', forms=svc==='forms', disc=svc==='disc', stats=svc==='stats', page=svc==='page', fac=(d.get('faculte')||'').trim(), name=(d.get('prenom')||'').trim(), titre=(d.get('titre')||'').trim(), obj=(d.get('objectif')||'').trim();
+    const svc=dlg.dataset.service||'stats', forms=svc==='forms', disc=svc==='disc', stats=svc==='stats', page=svc==='page', ppt=svc==='ppt', fac=(d.get('faculte')||'').trim(), name=(d.get('prenom')||'').trim(), titre=(d.get('titre')||'').trim(), obj=(d.get('objectif')||'').trim();
     let msg='';
     if(!stats&&!name)msg=ar()?'اكتب اسمك ولقبك.':'Indique ton nom et prénom.';
     else if(tel.replace(/[^0-9]/g,'').length<8)msg=ar()?'اكتب رقم تليفونك (8 أرقام على الأقل).':'Indique ton numéro de téléphone (au moins 8 chiffres).';
     else if(stats&&(!copies||+copies<1))msg=ar()?'اكتب عدد نسخ الاستبيان.':'Indique le nombre de copies du questionnaire.';
     else if(stats&&!coll)msg=ar()?'اختار طريقة جمع الإجابات.':'Choisis le type de collecte.';
-    else if(!page&&!etude)msg=ar()?'اكتب نوع الدراسة.':"Écris le type d'étude.";
-    else if(page&&!fac)msg=ar()?'اكتب الكلية ولا المدرسة متاعك.':'Indique ta faculté ou ton école.';
+    else if(!page&&!ppt&&!etude)msg=ar()?'اكتب نوع الدراسة.':"Écris le type d'étude.";
+    else if((page||ppt)&&!fac)msg=ar()?'اكتب الكلية ولا المدرسة متاعك.':'Indique ta faculté ou ton école.';
     else if(disc&&!titre)msg=ar()?'اكتب عنوان الدراسة.':"Écris le titre de l'étude.";
     else if(disc&&!obj)msg=ar()?'اكتب هدف الدراسة.':"Écris l'objectif de l'étude.";
-    else if(!ack){msg=page?(ar()?'أكّد إنك باش تبعث التقرير متاعك.':'Coche la case pour confirmer que tu enverras ton rapport Word.'):disc?(ar()?'أكّد إنك باش تبعث الوثائق متاعك.':'Coche la case pour confirmer que tu enverras tes documents.'):(ar()?'أكّد إنك باش تبعث الاستبيان متاعك.':"Coche la case pour confirmer que tu enverras ton questionnaire.");const nb=document.getElementById('dvAckBox');nb.classList.remove('need');void nb.offsetWidth;nb.classList.add('need');}
+    else if(!ack){msg=ppt?(ar()?'أكّد إنك باش تبعث محتوى العرض متاعك.':'Coche la case pour confirmer que tu enverras le contenu de ta présentation en Word.'):page?(ar()?'أكّد إنك باش تبعث التقرير متاعك.':'Coche la case pour confirmer que tu enverras ton rapport Word.'):disc?(ar()?'أكّد إنك باش تبعث الوثائق متاعك.':'Coche la case pour confirmer que tu enverras tes documents.'):(ar()?'أكّد إنك باش تبعث الاستبيان متاعك.':"Coche la case pour confirmer que tu enverras ton questionnaire.");const nb=document.getElementById('dvAckBox');nb.classList.remove('need');void nb.offsetWidth;nb.classList.add('need');}
     if(msg){err.textContent=msg;return;}
     const note=(d.get('remarques')||'').trim();
-    const lines=['Bonjour PFE STATS 👋','Je voudrais connaître le prix pour '+(forms?'un questionnaire Google Forms :':disc?'une discussion scientifique :':page?'une mise en page :':'une analyse statistique :'),''];
+    const lines=['Bonjour PFE STATS 👋','Je voudrais connaître le prix pour '+(forms?'un questionnaire Google Forms :':disc?'une discussion scientifique :':page?'une mise en page :':ppt?'une présentation PowerPoint :':'une analyse statistique :'),''];
     if(name)lines.push((stats?'• Prénom : ':'• Nom : ')+name);
     lines.push('• Téléphone : '+tel);
     if(stats)lines.push('• Nombre de copies : '+copies,'• Type de collecte : '+coll);
-    if(page)lines.push('• Faculté : '+fac);else lines.push("• Type d'étude : "+etude);
+    if(page||ppt)lines.push('• Faculté : '+fac);else lines.push("• Type d'étude : "+etude);
     if(disc)lines.push("• Titre de l'étude : "+titre,'• Objectif : '+obj);
-    lines.push(page?'• Rapport : je vous l’envoie juste après (Word)':disc?'• Documents : je vous envoie juste après les résultats, le questionnaire, le matériel et méthodes et l’introduction (Word ou PDF)':'• Questionnaire : je vous l’envoie juste après (Word ou PDF)');
+    lines.push(ppt?'• Contenu de la présentation : je vous l’envoie juste après (Word, résumé du rapport)':page?'• Rapport : je vous l’envoie juste après (Word)':disc?'• Documents : je vous envoie juste après les résultats, le questionnaire, le matériel et méthodes et l’introduction (Word ou PDF)':'• Questionnaire : je vous l’envoie juste après (Word ou PDF)');
     if(note)lines.push('• Remarques : '+note);
     const url='https://wa.me/21627244266?text='+encodeURIComponent(lines.join(NL));
     window.open(url,'_blank','noopener');

@@ -327,6 +327,58 @@ html[dir="rtl"] .mq-track{animation-name:mqr}
 .year{background:linear-gradient(110deg,transparent 40%,rgba(230,207,148,.55) 50%,transparent 60%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;animation:yshine 5s ease-in-out infinite}
 @keyframes yshine{from{background-position:150% 0}to{background-position:-100% 0}}
 
+/* devis form */
+.panel-actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:.8rem}
+.panel-actions .panel-cta{margin-top:0;border:0;font:inherit;font-weight:600;cursor:pointer}
+.panel-wa{border:1px solid rgba(255,255,255,.28);color:var(--paper)}
+.panel-wa:hover{border-color:var(--gold);color:var(--gold-soft)}
+.devis-modal{margin:auto;border:0;padding:0;width:min(520px,calc(100vw - 1.5rem));max-height:calc(100dvh - 2rem);border-radius:26px;background:var(--paper);color:var(--ink);box-shadow:0 40px 100px -30px rgba(0,0,0,.55);overflow:auto}
+.devis-modal::backdrop{background:rgba(17,18,20,.55);backdrop-filter:blur(6px)}
+.devis-modal[open]{animation:modalIn .5s cubic-bezier(.2,1.2,.4,1)}
+.dv-head{position:sticky;top:0;z-index:1;display:flex;align-items:center;gap:.8rem;padding:1.3rem 1.5rem;background:var(--ink);color:var(--paper)}
+.dv-head img{width:40px;height:40px;border-radius:50%;background:#fff}
+.dv-head h3{font-size:1.2rem;font-weight:700;line-height:1.2}
+.dv-head p{font-size:.85rem;color:#b8b8bd}
+.dv-close{margin-inline-start:auto;width:36px;height:36px;flex:none;border-radius:50%;border:1px solid #2e2f34;background:transparent;color:#cfcfd4;font-size:1.3rem;line-height:1;cursor:pointer}
+.dv-close:hover{border-color:var(--gold);color:var(--gold)}
+.dv-form{padding:1.4rem 1.5rem 1.6rem;display:grid;gap:1.1rem}
+.dv-field{display:grid;gap:.4rem}
+.dv-field > label,.dv-field > .dv-label{font-weight:600;font-size:.95rem}
+.dv-field small{color:var(--steel);font-size:.82rem}
+.dv-form input[type=text],.dv-form input[type=number],.dv-form textarea{width:100%;font:inherit;font-size:1rem;color:var(--ink);background:var(--fog);border:1px solid var(--line);border-radius:14px;padding:.8rem .95rem;transition:border-color .2s, background .2s, box-shadow .2s}
+.dv-form textarea{min-height:84px;resize:vertical}
+.dv-form input:focus,.dv-form textarea:focus{outline:none;border-color:var(--gold);background:#fff;box-shadow:0 0 0 4px rgba(201,162,74,.18)}
+.dv-choices{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
+.dv-choices label{position:relative;display:flex;align-items:center;justify-content:center;text-align:center;min-height:48px;padding:.6rem;border:1px solid var(--line);border-radius:14px;background:var(--fog);font-weight:600;font-size:.92rem;cursor:pointer;transition:all .2s}
+.dv-choices input{position:absolute;opacity:0;pointer-events:none}
+.dv-choices label:has(input:checked){background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.dv-choices label:has(input:focus-visible){outline:2px solid var(--gold);outline-offset:2px}
+.dv-file{position:relative;display:flex;align-items:center;gap:.8rem;padding:1rem;border:1.5px dashed #d8c48e;border-radius:16px;background:#fdfaf2;cursor:pointer;transition:background .2s, border-color .2s}
+.dv-file:hover{background:#faf3df;border-color:var(--gold)}
+.dv-file input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.dv-file svg{width:30px;height:30px;color:var(--gold-deep);flex:none}
+.dv-file b{display:block;font-size:.95rem}
+.dv-file span{font-size:.82rem;color:var(--steel);word-break:break-all}
+.dv-file.has b{color:var(--gold-deep)}
+.dv-err{color:#b3261e;font-size:.85rem;min-height:1em}
+.dv-submit{width:100%;justify-content:center;border:0;font:inherit;font-weight:700;font-size:1.02rem;cursor:pointer;background:#1f9e57;color:#fff;padding:1.05rem}
+.dv-submit:hover{background:#178a4b}
+.dv-alt{text-align:center;font-size:.88rem;color:var(--steel)}
+.dv-alt a{color:var(--gold-deep);font-weight:600}
+.dv-done{display:none;padding:2rem 1.5rem 2.2rem;text-align:center;gap:.9rem}
+.devis-modal.sent .dv-form{display:none}
+.devis-modal.sent .dv-done{display:grid}
+.dv-done .dv-check{width:64px;height:64px;margin:0 auto;border-radius:50%;display:grid;place-items:center;background:#e8f6ee;color:#1f9e57;font-size:2rem;animation:pop .6s cubic-bezier(.3,1.5,.5,1)}
+.dv-done h4{font-size:1.3rem}
+.dv-done p{color:var(--body)}
+.dv-done .dv-fname{display:inline-block;margin-top:.2rem;padding:.3rem .7rem;border-radius:10px;background:var(--fog);font-weight:600;word-break:break-all}
+@media (max-width:520px){
+  .devis-modal{width:100vw;max-width:100vw;max-height:92dvh;margin:auto auto 0;border-radius:24px 24px 0 0}
+  .devis-modal[open]{animation:sheetUp .45s cubic-bezier(.2,.8,.2,1)}
+  .dv-choices{grid-template-columns:1fr 1fr 1fr}
+}
+@keyframes sheetUp{from{transform:translateY(100%)}to{transform:none}}
+
 /* stats modal */
 .stats-modal{margin:auto;border:0;padding:2.2rem 2rem 2rem;width:min(440px,calc(100vw - 2rem));border-radius:28px;background:var(--ink);color:var(--paper);overflow:hidden;text-align:center;box-shadow:0 40px 100px -30px rgba(0,0,0,.6)}
 .stats-modal::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 55% at 50% 0%,rgba(201,162,74,.32),transparent 70%);pointer-events:none}
@@ -509,7 +561,10 @@ html[lang="ar"] .stats-modal h3{letter-spacing:0}
           <li data-fr="Commentaires et interprétation des résultats" data-ar="تعليق وتفسير النتائج">Commentaires et interprétation des résultats</li>
           <li data-fr="Des analyses claires et précises" data-ar="تحاليل واضحة ودقيقة">Des analyses claires et précises</li>
         </ul>
-          <a class="btn btn-gold panel-cta" href="https://wa.me/21627244266?text=Bonjour%20PFE%20STATS%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20%3A%20Analyse%20statistique%20sous%20SPSS" target="_blank" rel="noopener"><span data-fr="Demander ce service" data-ar="اطلب هالخدمة">Demander ce service</span></a>
+          <div class="panel-actions">
+            <button class="btn btn-gold panel-cta" type="button" data-open-devis><span data-fr="Demander un devis" data-ar="اطلب سوم الخدمة">Demander un devis</span></button>
+            <a class="btn panel-wa" href="https://wa.me/21627244266?text=Bonjour%20PFE%20STATS%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20%3A%20Analyse%20statistique%20sous%20SPSS" target="_blank" rel="noopener"><span data-fr="Écrire sur WhatsApp" data-ar="ابعثلنا على WhatsApp">Écrire sur WhatsApp</span></a>
+          </div>
         </div>
         <div class="svc-panel" role="tabpanel" id="panel-forms" aria-labelledby="tab-forms" hidden>
           <div class="svc-head">
@@ -682,6 +737,61 @@ html[lang="ar"] .stats-modal h3{letter-spacing:0}
   </div>
 </footer>
 
+<dialog class="devis-modal" id="devisModal" aria-labelledby="dvTitle">
+  <div class="dv-head">
+    <img src="logo.webp" alt="" width="40" height="40">
+    <div>
+      <h3 id="dvTitle" data-fr="Devis analyse statistique" data-ar="سوم التحليل الإحصائي">Devis analyse statistique</h3>
+      <p data-fr="Réponds en 1 minute, on te donne le prix sur WhatsApp." data-ar="جاوب في دقيقة، ونعطيوك السوم على WhatsApp.">Réponds en 1 minute, on te donne le prix sur WhatsApp.</p>
+    </div>
+    <button class="dv-close" type="button" data-close-devis aria-label="Fermer / إغلاق">×</button>
+  </div>
+  <form class="dv-form" id="devisForm" novalidate>
+    <div class="dv-field">
+      <label for="dvName" data-fr="Ton prénom (facultatif)" data-ar="اسمك (اختياري)">Ton prénom (facultatif)</label>
+      <input type="text" id="dvName" name="prenom" autocomplete="given-name" data-fr-ph="Ex. : Amira" data-ar-ph="مثال: أميرة" placeholder="Ex. : Amira">
+    </div>
+    <div class="dv-field">
+      <label for="dvCopies" data-fr="Nombre de copies du questionnaire" data-ar="عدد نسخ الاستبيان">Nombre de copies du questionnaire</label>
+      <input type="number" id="dvCopies" name="copies" min="1" max="100000" inputmode="numeric" required data-fr-ph="Ex. : 120" data-ar-ph="مثال: 120" placeholder="Ex. : 120">
+    </div>
+    <div class="dv-field" role="radiogroup" aria-labelledby="dvCollLabel">
+      <span class="dv-label" id="dvCollLabel" data-fr="Type de collecte" data-ar="طريقة جمع الإجابات">Type de collecte</span>
+      <div class="dv-choices">
+        <label><input type="radio" name="collecte" value="En ligne" required><span data-fr="En ligne" data-ar="أونلاين">En ligne</span></label>
+        <label><input type="radio" name="collecte" value="Papier"><span data-fr="Papier" data-ar="ورقي">Papier</span></label>
+        <label><input type="radio" name="collecte" value="En ligne + papier"><span data-fr="Les deux" data-ar="الزوز">Les deux</span></label>
+      </div>
+    </div>
+    <div class="dv-field">
+      <label for="dvType" data-fr="Type d'étude" data-ar="نوع الدراسة">Type d'étude</label>
+      <input type="text" id="dvType" name="etude" required data-fr-ph="Ex. : étude descriptive et analytique (comparaison entre deux services)" data-ar-ph="مثال: دراسة وصفية وتحليلية (مقارنة بين مصلحتين)" placeholder="Ex. : étude descriptive et analytique (comparaison entre deux services)">
+    </div>
+    <div class="dv-field">
+      <span class="dv-label" data-fr="Ton questionnaire (Word ou PDF)" data-ar="الاستبيان متاعك (Word ولا PDF)">Ton questionnaire (Word ou PDF)</span>
+      <label class="dv-file" id="dvFileBox">
+        <input type="file" id="dvFile" name="questionnaire" accept=".doc,.docx,.pdf,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 17v-6M9 14l3-3 3 3"/></svg>
+        <div><b id="dvFileTitle" data-fr="Choisir le fichier" data-ar="اختار الملف">Choisir le fichier</b><span id="dvFileName" data-fr="Tu le joindras dans WhatsApp à l'étape suivante." data-ar="باش تبعثو في WhatsApp في الخطوة الجاية.">Tu le joindras dans WhatsApp à l'étape suivante.</span></div>
+      </label>
+    </div>
+    <div class="dv-field">
+      <label for="dvNote" data-fr="Remarques (facultatif)" data-ar="ملاحظات (اختياري)">Remarques (facultatif)</label>
+      <textarea id="dvNote" name="remarques" data-fr-ph="Ex. : date limite, logiciel demandé par l'encadrant…" data-ar-ph="مثال: آخر أجل، البرنامج اللي طلبو المؤطر…" placeholder="Ex. : date limite, logiciel demandé par l'encadrant…"></textarea>
+    </div>
+    <p class="dv-err" id="dvErr" role="alert"></p>
+    <button class="btn dv-submit" type="submit"><span data-fr="Envoyer sur WhatsApp" data-ar="ابعث على WhatsApp">Envoyer sur WhatsApp</span></button>
+    <p class="dv-alt"><span data-fr="Tu préfères discuter directement ?" data-ar="تحب تحكي معانا مباشرة؟">Tu préfères discuter directement ?</span> <a href="https://wa.me/21627244266" target="_blank" rel="noopener" data-fr="Écris-nous sur WhatsApp" data-ar="ابعثلنا على WhatsApp">Écris-nous sur WhatsApp</a></p>
+  </form>
+  <div class="dv-done" aria-live="polite">
+    <div class="dv-check" aria-hidden="true">✓</div>
+    <h4 data-fr="Dernière étape sur WhatsApp" data-ar="آخر خطوة على WhatsApp">Dernière étape sur WhatsApp</h4>
+    <p data-fr="Envoie le message déjà écrit, puis joins ton questionnaire avec le trombone 📎 :" data-ar="ابعث الميساج المكتوب، ومن بعد زيد الاستبيان بالـ 📎 :">Envoie le message déjà écrit, puis joins ton questionnaire avec le trombone 📎 :</p>
+    <span class="dv-fname" id="dvDoneFile"></span>
+    <a class="btn dv-submit" id="dvReopen" href="https://wa.me/21627244266" target="_blank" rel="noopener"><span data-fr="Rouvrir WhatsApp" data-ar="حل WhatsApp من جديد">Rouvrir WhatsApp</span></a>
+  </div>
+</dialog>
+
 <dialog class="stats-modal" id="statsModal" aria-labelledby="smTitle">
   <button class="sm-close" type="button" data-close-stats aria-label="Fermer / إغلاق">×</button>
   <div class="sm-top">
@@ -851,6 +961,45 @@ document.querySelectorAll('.svc-panel').forEach(c=>c.addEventListener('pointermo
   if(location.hash==='#chiffres-2026')setTimeout(open,900);
 })();
 
+// devis form (analyse statistique) -> WhatsApp
+(function(){
+  const dlg=document.getElementById('devisModal'), form=document.getElementById('devisForm');
+  const file=document.getElementById('dvFile'), box=document.getElementById('dvFileBox');
+  const err=document.getElementById('dvErr'), NL=String.fromCharCode(10);
+  const ar=()=>document.documentElement.lang==='ar';
+  window.__dvFileLabel=function(){
+    const f=file.files[0], t=document.getElementById('dvFileTitle'), n=document.getElementById('dvFileName');
+    if(f){box.classList.add('has');t.textContent=ar()?'الملف المختار':'Fichier choisi';n.textContent=f.name;}
+  };
+  file.addEventListener('change',()=>{err.textContent='';window.__dvFileLabel();});
+  document.querySelectorAll('[data-open-devis]').forEach(b=>b.addEventListener('click',()=>{dlg.classList.remove('sent');err.textContent='';dlg.showModal?dlg.showModal():dlg.setAttribute('open','');}));
+  const close=()=>{dlg.close?dlg.close():dlg.removeAttribute('open');};
+  dlg.querySelector('[data-close-devis]').addEventListener('click',close);
+  dlg.addEventListener('click',e=>{if(e.target===dlg)close();});
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    const d=new FormData(form), f=file.files[0];
+    const copies=(d.get('copies')||'').trim(), coll=d.get('collecte'), etude=(d.get('etude')||'').trim();
+    let msg='';
+    if(!copies||+copies<1)msg=ar()?'اكتب عدد نسخ الاستبيان.':'Indique le nombre de copies du questionnaire.';
+    else if(!coll)msg=ar()?'اختار طريقة جمع الإجابات.':'Choisis le type de collecte.';
+    else if(!etude)msg=ar()?'اكتب نوع الدراسة.':"Écris le type d'étude.";
+    else if(!f)msg=ar()?'اختار ملف الاستبيان (Word ولا PDF).':'Choisis ton questionnaire (Word ou PDF).';
+    else if(!/[.](docx?|pdf)$/i.test(f.name))msg=ar()?'الملف لازم يكون Word ولا PDF.':'Le fichier doit être un Word ou un PDF.';
+    if(msg){err.textContent=msg;return;}
+    const name=(d.get('prenom')||'').trim(), note=(d.get('remarques')||'').trim();
+    const lines=['Bonjour PFE STATS 👋','Je voudrais connaître le prix pour une analyse statistique :',''];
+    if(name)lines.push('• Prénom : '+name);
+    lines.push('• Nombre de copies : '+copies,'• Type de collecte : '+coll,"• Type d'étude : "+etude,'• Questionnaire : '+f.name+' (je le joins ici)');
+    if(note)lines.push('• Remarques : '+note);
+    const url='https://wa.me/21627244266?text='+encodeURIComponent(lines.join(NL));
+    document.getElementById('dvReopen').href=url;
+    document.getElementById('dvDoneFile').textContent='📎 '+f.name;
+    dlg.classList.add('sent');
+    window.open(url,'_blank','noopener');
+  });
+})();
+
 // mobile bottom nav: highlight current section
 (function(){
   const links=[...document.querySelectorAll('.mnav a[data-target]')];
@@ -868,6 +1017,8 @@ function setLang(l){
   const h=document.documentElement;
   h.lang=l; h.dir=l==='ar'?'rtl':'ltr';
   document.querySelectorAll('[data-fr]').forEach(el=>{el.textContent=el.dataset[l];});
+  document.querySelectorAll('[data-fr-ph]').forEach(el=>{el.placeholder=el.dataset[l+'Ph'];});
+  if(window.__dvFileLabel)window.__dvFileLabel();
   splitHeadline();
   btn.innerHTML=l==='ar'?'<span>Français</span>':'<span class="to-ar">العربية</span>';
   btn.setAttribute('aria-label',l==='ar'?'Passer en français':'التبديل إلى العربية');

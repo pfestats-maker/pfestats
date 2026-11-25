@@ -442,6 +442,34 @@ html[lang="ar"] .stats-modal h3{letter-spacing:0}
   .hero .lead,.hero .cta-row,.hero .hero-proof,.avatar,.fbadge{opacity:1}
   .mq-track,.stats-btn,.stats-btn::after,.sb-star,.halo,.year{animation:none}
 }
+
+/* ===== phone polish ===== */
+@media (max-width:760px){
+  .stats-btn,.lang{min-height:42px}
+  .svc-picker{grid-template-columns:minmax(0,1fr)}
+  .tab-delay{font-size:.82rem}
+  .fbadge{font-size:.8rem}
+}
+@media (max-width:600px){
+  .hero{min-height:auto;padding:92px 0 44px}
+  .hero-grid{gap:1.6rem}
+  .curve-box{order:0;max-width:340px;margin-top:.4rem}
+  .hero p.lead{max-width:none}
+  .cta-row{flex-direction:column;align-items:stretch;gap:.75rem;margin-top:1.8rem}
+  .cta-row .btn{justify-content:center;width:100%;min-height:52px}
+  button.hero-proof{margin-top:1.2rem}
+  section.block{padding:3.6rem 0}
+  .block .intro{font-size:1rem}
+  .panel-actions{flex-direction:column}
+  .panel-actions .btn{justify-content:center;width:100%;min-height:50px}
+  .clink{padding:1.1rem 1.2rem}
+}
+@media (max-width:360px){
+  :root{--pad:1rem}
+  .nav-links{gap:.4rem}
+  .lang{padding:.35rem .7rem}
+  .stats-btn{padding:.42rem .7rem}
+}
 </style>
 <script>
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };

@@ -360,6 +360,7 @@ html[dir="rtl"] .mq-track{animation-name:mqr}
 .dv-file b{display:block;font-size:.95rem}
 .dv-file span{font-size:.82rem;color:var(--steel);word-break:break-all}
 .dv-file.has b{color:var(--gold-deep)}
+.devis-modal[data-service="forms"] .only-stats,.devis-modal:not([data-service="forms"]) .only-forms{display:none}
 .dv-note{position:relative;display:flex;gap:.75rem;align-items:flex-start;padding:.9rem 1rem;border-radius:14px;background:#fdfaf2;border:1.5px solid #efe2bf;color:var(--body);font-size:.9rem;line-height:1.45;cursor:pointer;transition:border-color .2s, background .2s}
 .dv-note input{position:absolute;opacity:0;width:1px;height:1px}
 .dv-ck{flex:none;width:24px;height:24px;margin-top:1px;border-radius:7px;border:2px solid var(--gold);background:#fff;display:grid;place-items:center;transition:background .2s, transform .2s}
@@ -572,7 +573,7 @@ html[lang="ar"] .stats-modal h3{letter-spacing:0}
           <li data-fr="Des analyses claires et précises" data-ar="تحاليل واضحة ودقيقة">Des analyses claires et précises</li>
         </ul>
           <div class="panel-actions">
-            <button class="btn btn-gold panel-cta" type="button" data-open-devis><span data-fr="Demander un devis" data-ar="اطلب سوم الخدمة">Demander un devis</span></button>
+            <button class="btn btn-gold panel-cta" type="button" data-open-devis="stats"><span data-fr="Demander un devis" data-ar="اطلب سوم الخدمة">Demander un devis</span></button>
             <a class="btn panel-wa" href="https://wa.me/21627244266?text=Bonjour%20PFE%20STATS%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20%3A%20Analyse%20statistique%20sous%20SPSS" target="_blank" rel="noopener"><span data-fr="Écrire sur WhatsApp" data-ar="ابعثلنا على WhatsApp">Écrire sur WhatsApp</span></a>
           </div>
         </div>
@@ -588,7 +589,10 @@ html[lang="ar"] .stats-modal h3{letter-spacing:0}
           <li data-fr="Collecte organisée pour éviter les erreurs de réponses" data-ar="تنظيم جمع الإجابات باش ما يصيروش أخطاء">Collecte organisée pour éviter les erreurs de réponses</li>
           <li data-fr="Base de données structurée, prête à analyser" data-ar="قاعدة بيانات منظمة وجاهزة للتحليل">Base de données structurée, prête à analyser</li>
         </ul>
-          <a class="btn btn-gold panel-cta" href="https://wa.me/21627244266?text=Bonjour%20PFE%20STATS%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20%3A%20Questionnaire%20Google%20Forms" target="_blank" rel="noopener"><span data-fr="Demander ce service" data-ar="اطلب هالخدمة">Demander ce service</span></a>
+          <div class="panel-actions">
+            <button class="btn btn-gold panel-cta" type="button" data-open-devis="forms"><span data-fr="Demander un devis" data-ar="اطلب سوم الخدمة">Demander un devis</span></button>
+            <a class="btn panel-wa" href="https://wa.me/21627244266?text=Bonjour%20PFE%20STATS%2C%20je%20suis%20int%C3%A9ress%C3%A9%28e%29%20par%20%3A%20Questionnaire%20Google%20Forms" target="_blank" rel="noopener"><span data-fr="Écrire sur WhatsApp" data-ar="ابعثلنا على WhatsApp">Écrire sur WhatsApp</span></a>
+          </div>
         </div>
         <div class="svc-panel" role="tabpanel" id="panel-disc" aria-labelledby="tab-disc" hidden>
           <div class="svc-head">
@@ -751,25 +755,25 @@ html[lang="ar"] .stats-modal h3{letter-spacing:0}
   <div class="dv-head">
     <img src="logo.webp" alt="" width="40" height="40">
     <div>
-      <h3 id="dvTitle" data-fr="Devis analyse statistique" data-ar="سوم التحليل الإحصائي">Devis analyse statistique</h3>
+      <h3 id="dvTitle"><span class="only-stats" data-fr="Devis analyse statistique" data-ar="سوم التحليل الإحصائي">Devis analyse statistique</span><span class="only-forms" data-fr="Devis questionnaire Google Forms" data-ar="سوم استبيان Google Forms">Devis questionnaire Google Forms</span></h3>
       <p data-fr="Réponds en 1 minute, on te donne le prix sur WhatsApp." data-ar="جاوب في دقيقة، ونعطيوك السوم على WhatsApp.">Réponds en 1 minute, on te donne le prix sur WhatsApp.</p>
     </div>
     <button class="dv-close" type="button" data-close-devis aria-label="Fermer / إغلاق">×</button>
   </div>
   <form class="dv-form" id="devisForm" novalidate>
     <div class="dv-field">
-      <label for="dvName" data-fr="Ton prénom (facultatif)" data-ar="اسمك (اختياري)">Ton prénom (facultatif)</label>
+      <label for="dvName"><span class="only-stats" data-fr="Ton prénom (facultatif)" data-ar="اسمك (اختياري)">Ton prénom (facultatif)</span><span class="only-forms" data-fr="Ton nom et prénom" data-ar="اسمك ولقبك">Ton nom et prénom</span></label>
       <input type="text" id="dvName" name="prenom" autocomplete="given-name" data-fr-ph="Ex. : Amira" data-ar-ph="مثال: أميرة" placeholder="Ex. : Amira">
     </div>
     <div class="dv-field">
       <label for="dvTel" data-fr="Ton numéro de téléphone" data-ar="رقم تليفونك">Ton numéro de téléphone</label>
       <input type="tel" id="dvTel" name="tel" autocomplete="tel" inputmode="tel" required dir="ltr" data-fr-ph="Ex. : 22 123 456" data-ar-ph="مثال: 22 123 456" placeholder="Ex. : 22 123 456">
     </div>
-    <div class="dv-field">
+    <div class="dv-field only-stats">
       <label for="dvCopies" data-fr="Nombre de copies du questionnaire" data-ar="عدد نسخ الاستبيان">Nombre de copies du questionnaire</label>
       <input type="number" id="dvCopies" name="copies" min="1" max="100000" inputmode="numeric" required data-fr-ph="Ex. : 120" data-ar-ph="مثال: 120" placeholder="Ex. : 120">
     </div>
-    <div class="dv-field" role="radiogroup" aria-labelledby="dvCollLabel">
+    <div class="dv-field only-stats" role="radiogroup" aria-labelledby="dvCollLabel">
       <span class="dv-label" id="dvCollLabel" data-fr="Type de collecte" data-ar="طريقة جمع الإجابات">Type de collecte</span>
       <div class="dv-choices">
         <label><input type="radio" name="collecte" value="En ligne" required><span data-fr="En ligne" data-ar="أونلاين">En ligne</span></label>
@@ -965,13 +969,13 @@ document.querySelectorAll('.svc-panel').forEach(c=>c.addEventListener('pointermo
   if(location.hash==='#chiffres-2026')setTimeout(open,900);
 })();
 
-// devis form (analyse statistique) -> WhatsApp
+// devis forms (statistique, Google Forms) -> WhatsApp
 (function(){
   const dlg=document.getElementById('devisModal'), form=document.getElementById('devisForm');
   const err=document.getElementById('dvErr'), NL=String.fromCharCode(10);
   document.getElementById('dvAck').addEventListener('change',()=>{document.getElementById('dvAckBox').classList.remove('need');err.textContent='';});
   const ar=()=>document.documentElement.lang==='ar';
-  document.querySelectorAll('[data-open-devis]').forEach(b=>b.addEventListener('click',()=>{dlg.classList.remove('sent');err.textContent='';dlg.showModal?dlg.showModal():dlg.setAttribute('open','');}));
+  document.querySelectorAll('[data-open-devis]').forEach(b=>b.addEventListener('click',()=>{dlg.dataset.service=b.dataset.openDevis||'stats';err.textContent='';dlg.showModal?dlg.showModal():dlg.setAttribute('open','');}));
   const close=()=>{dlg.close?dlg.close():dlg.removeAttribute('open');};
   dlg.querySelector('[data-close-devis]').addEventListener('click',close);
   dlg.addEventListener('click',e=>{if(e.target===dlg)close();});
@@ -980,18 +984,21 @@ document.querySelectorAll('.svc-panel').forEach(c=>c.addEventListener('pointermo
     const d=new FormData(form);
     const copies=(d.get('copies')||'').trim(), coll=d.get('collecte'), etude=(d.get('etude')||'').trim();
     const tel=(d.get('tel')||'').trim(), ack=document.getElementById('dvAck').checked;
+    const forms=dlg.dataset.service==='forms', name=(d.get('prenom')||'').trim();
     let msg='';
-    if(tel.replace(/[^0-9]/g,'').length<8)msg=ar()?'اكتب رقم تليفونك (8 أرقام على الأقل).':'Indique ton numéro de téléphone (au moins 8 chiffres).';
-    else if(!copies||+copies<1)msg=ar()?'اكتب عدد نسخ الاستبيان.':'Indique le nombre de copies du questionnaire.';
-    else if(!coll)msg=ar()?'اختار طريقة جمع الإجابات.':'Choisis le type de collecte.';
+    if(forms&&!name)msg=ar()?'اكتب اسمك ولقبك.':'Indique ton nom et prénom.';
+    else if(tel.replace(/[^0-9]/g,'').length<8)msg=ar()?'اكتب رقم تليفونك (8 أرقام على الأقل).':'Indique ton numéro de téléphone (au moins 8 chiffres).';
+    else if(!forms&&(!copies||+copies<1))msg=ar()?'اكتب عدد نسخ الاستبيان.':'Indique le nombre de copies du questionnaire.';
+    else if(!forms&&!coll)msg=ar()?'اختار طريقة جمع الإجابات.':'Choisis le type de collecte.';
     else if(!etude)msg=ar()?'اكتب نوع الدراسة.':"Écris le type d'étude.";
     else if(!ack){msg=ar()?'أكّد إنك باش تبعث الاستبيان متاعك.':"Coche la case pour confirmer que tu enverras ton questionnaire.";const nb=document.getElementById('dvAckBox');nb.classList.remove('need');void nb.offsetWidth;nb.classList.add('need');}
     if(msg){err.textContent=msg;return;}
-    const name=(d.get('prenom')||'').trim(), note=(d.get('remarques')||'').trim();
-    const lines=['Bonjour PFE STATS 👋','Je voudrais connaître le prix pour une analyse statistique :',''];
-    if(name)lines.push('• Prénom : '+name);
+    const note=(d.get('remarques')||'').trim();
+    const lines=['Bonjour PFE STATS 👋','Je voudrais connaître le prix pour '+(forms?'un questionnaire Google Forms :':'une analyse statistique :'),''];
+    if(name)lines.push((forms?'• Nom : ':'• Prénom : ')+name);
     lines.push('• Téléphone : '+tel);
-    lines.push('• Nombre de copies : '+copies,'• Type de collecte : '+coll,"• Type d'étude : "+etude,'• Questionnaire : je vous l’envoie juste après (Word ou PDF)');
+    if(!forms)lines.push('• Nombre de copies : '+copies,'• Type de collecte : '+coll);
+    lines.push("• Type d'étude : "+etude,'• Questionnaire : je vous l’envoie juste après (Word ou PDF)');
     if(note)lines.push('• Remarques : '+note);
     const url='https://wa.me/21627244266?text='+encodeURIComponent(lines.join(NL));
     window.open(url,'_blank','noopener');
